@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekspedisi Arif & W — Fresh Seafood Makassar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5ede0;
+    --deep: #1a0e05;
+    --amber: #c4782a;
+    --gold: #d4a043;
+    --rust: #8b3a1a;
+    --warm-white: #fdf8f2;
+    --muted: #7a6251;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--deep);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1000; opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    mix-blend-mode: normal;
+    background: linear-gradient(to bottom, rgba(26,14,5,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s, color 0.3s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(196,120,42,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 80% 60%, rgba(139,58,26,0.18) 0%, transparent 60%),
+      linear-gradient(160deg, #1a0e05 0%, #2d1507 40%, #1a0e05 100%);
+  }
+
+  .hero-ornament {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,160,67,0.08);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin-slow 40s linear infinite;
+  }
+
+  .hero-ornament::before {
+    content: '';
+    position: absolute; inset: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,160,67,0.05);
+  }
+
+  @keyframes spin-slow { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 0 2rem;
+    animation: fade-up 1.2s ease both;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    animation: fade-up 1.2s 0.1s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--warm-white);
+    margin-bottom: 0.3em;
+    animation: fade-up 1.2s 0.2s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: rgba(245,237,224,0.65);
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    animation: fade-up 1.2s 0.35s ease both;
+  }
+
+  .hero-cta {
+    display: inline-flex; gap: 1.5rem;
+    animation: fade-up 1.2s 0.5s ease both;
+  }
+
+  .btn-primary {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    background: var(--amber);
+    color: var(--deep);
+    padding: 1rem 2.5rem;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s, transform 0.2s;
+    font-weight: 700;
+  }
+
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+
+  .btn-outline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--cream);
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(245,237,224,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    animation: fade-up 1.2s 0.8s ease both;
+  }
+
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  .scroll-label {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    writing-mode: vertical-rl;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 0 auto 5rem;
+    max-width: 300px;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: rgba(212,160,67,0.25); }
+  .divider-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 8rem 2rem; position: relative; }
+
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--warm-white);
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    background: linear-gradient(135deg, #1e1008 0%, #150b04 60%, #1e1008 100%);
+  }
+
+  .about-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+
+  .about-left { padding-right: 2rem; }
+
+  .about-left p {
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: rgba(245,237,224,0.72);
+    margin-top: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-quote {
+    margin-top: 2.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--amber);
+  }
+
+  .about-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--gold);
+    line-height: 1.5;
+  }
+
+  .about-right {
+    position: relative;
+  }
+
+  .about-img-frame {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+  }
+
+  .about-img-frame::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(26,14,5,0.8));
+    z-index: 1;
+  }
+
+  .about-img-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #2d1507 0%, #3d1f0a 50%, #1a0e05 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .plate-icon {
+    font-size: 6rem;
+    opacity: 0.3;
+  }
+
+  .about-badge {
+    position: absolute;
+    bottom: -2rem; left: -2rem;
+    width: 120px; height: 120px;
+    background: var(--amber);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 2;
+    animation: rotate-badge 20s linear infinite;
+  }
+
+  @keyframes rotate-badge { to { transform: rotate(360deg); } }
+
+  .badge-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--deep);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 3rem;
+  }
+
+  .stat {
+    padding: 1.5rem;
+    border: 1px solid rgba(212,160,67,0.15);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .stat:hover { border-color: rgba(212,160,67,0.4); }
+
+  .stat::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--amber);
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 0.4s;
+  }
+
+  .stat:hover::before { transform: scaleY(1); }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* ─── MENU ─── */
+  .menu-section {
+    background: var(--deep);
+  }
+
+  .menu-header {
+    text-align: center;
+    max-width: 600px; margin: 0 auto 5rem;
+  }
+
+  .menu-header p {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: rgba(245,237,224,0.55);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .menu-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .menu-item {
+    padding: 3rem 2.5rem;
+    border: 1px solid rgba(212,160,67,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .menu-item:hover { background: rgba(196,120,42,0.06); }
+
+  .menu-item::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--amber), transparent);
+    transform: scaleX(0);
+    transition: transform 0.5s;
+  }
+
+  .menu-item:hover::after { transform: scaleX(1); }
+
+  .menu-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .menu-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--warm-white);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .menu-desc {
+    font-size: 0.95rem;
+    color: rgba(245,237,224,0.5);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .menu-price {
+    margin-top: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* ─── EXPERIENCE STRIP ─── */
+  .strip {
+    background: var(--amber);
+    padding: 2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+  }
+
+  .strip-inner {
+    display: inline-flex; gap: 4rem;
+    animation: marquee 20s linear infinite;
+  }
+
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .strip-item {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--deep);
+    font-weight: 700;
+    display: flex; align-items: center; gap: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .strip-dot { width: 5px; height: 5px; background: var(--deep); border-radius: 50%; flex-shrink: 0; }
+
+  /* ─── GALLERY ─── */
+  .gallery-section {
+    background: #150b04;
+    padding: 8rem 0;
+  }
+
+  .gallery-header {
+    text-align: center;
+    padding: 0 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 300px 200px;
+    gap: 4px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gallery-item:first-child { grid-row: 1 / 3; }
+
+  .gallery-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #2d1507, #1a0e05);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    opacity: 0.4;
+    transition: transform 0.6s ease;
+  }
+
+  .gallery-item:hover .gallery-placeholder { transform: scale(1.05); }
+
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,14,5,0.7), transparent 50%);
+    opacity: 0; transition: opacity 0.4s;
+    display: flex; align-items: flex-end;
+    padding: 1.5rem;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--cream);
+    font-size: 1rem;
+  }
+
+  /* ─── INFO ─── */
+  .info-section {
+    background: linear-gradient(135deg, #1e1008, #1a0e05);
+  }
+
+  .info-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: start;
+  }
+
+  .info-left .section-title { margin-bottom: 2rem; }
+
+  .info-detail {
+    display: flex; gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(212,160,67,0.1);
+  }
+
+  .info-detail:last-child { border-bottom: none; }
+
+  .info-icon {
+    width: 42px; height: 42px;
+    border: 1px solid rgba(212,160,67,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .info-text-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .info-text-val {
+    font-size: 1.05rem;
+    color: var(--cream);
+    line-height: 1.6;
+  }
+
+  .info-text-val a { color: var(--gold); text-decoration: none; }
+
+  .info-right {
+    padding-top: 1rem;
+  }
+
+  .map-placeholder {
+    width: 100%; aspect-ratio: 1;
+    background: linear-gradient(135deg, #2d1507, #1a0e05);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(212,160,67,0.15);
+    font-size: 3rem; opacity: 0.3;
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 40px,
+      rgba(212,160,67,0.04) 40px, rgba(212,160,67,0.04) 41px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 40px,
+      rgba(212,160,67,0.04) 40px, rgba(212,160,67,0.04) 41px
+    );
+  }
+
+  .map-inner { text-align: center; position: relative; z-index: 1; }
+  .map-inner p { font-size: 0.85rem; letter-spacing: 0.2em; margin-top: 0.5rem; color: var(--muted); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0d0602;
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(212,160,67,0.1);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-links {
+    display: flex; justify-content: center; gap: 2.5rem;
+    list-style: none; margin-bottom: 3rem;
+  }
+
+  .footer-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,237,224,0.45);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    font-size: 0.75rem;
+    color: rgba(245,237,224,0.2);
+    letter-spacing: 0.1em;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245,237,224,0.05);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem; }
+    .nav-links { display: none; }
+
+    .about-inner, .info-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .about-left { padding-right: 0; }
+
+    .menu-grid { grid-template-columns: 1fr; }
+
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gallery-item:first-child { grid-row: auto; }
+  }
+
+  /* ─── SCROLL ANIMATION ─── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ekspedisi Arif & W</div>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Galeri</a></li>
+    <li><a href="#info">Kunjungi</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Masakan Khas Banjarmasin · Sejak Dulu</p>
+    <h1 class="hero-title">
+      Ekspedisi
+      <em>Arif & W</em>
+    </h1>
+    <p class="hero-subtitle">Cita rasa laut yang segar, disajikan dengan jiwa Makassar<br>di tengah kota Banjarmasin</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn-primary">Lihat Menu</a>
+      <a href="#info" class="btn-outline">Kunjungi Kami</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Gulir</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-left reveal">
+      <span class="section-tag">Tentang Kami</span>
+      <h2 class="section-title">Hidangan Laut<br>Segar Setiap Hari</h2>
+      <p>Ekspedisi Arif & W menghadirkan kekayaan masakan khas Makassar yang autentik — mulai dari seafood segar pilihan, bumbu rempah pilihan, hingga cita rasa yang tak terlupakan.</p>
+      <p style="margin-top:1rem;">Setiap hidangan adalah perjalanan rasa yang dibuat dengan penuh cinta dan keahlian turun-temurun, menjaga keaslian resep tradisional yang telah menggugah selera pelanggan setia kami.</p>
+
+      <div class="about-quote">
+        <blockquote>"Menu makanan khas masakan Makasar — fresh seafood menu"</blockquote>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat reveal reveal-delay-1">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Seafood Segar</div>
+        </div>
+        <div class="stat reveal reveal-delay-2">
+          <div class="stat-num">Buka</div>
+          <div class="stat-label">Setiap Hari s/d 21.00</div>
+        </div>
+        <div class="stat reveal reveal-delay-3">
+          <div class="stat-num">★ 4.5</div>
+          <div class="stat-label">Rating Google</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num">Khas</div>
+          <div class="stat-label">Makassar Asli</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right reveal reveal-delay-2">
+      <div class="about-img-frame">
+        <div class="about-img-placeholder">
+          <div style="text-align:center; opacity:0.5;">
+            <div style="font-size:5rem;">🦐</div>
+            <div style="font-family:'Playfair Display',serif; font-size:0.8rem; letter-spacing:0.3em; margin-top:1rem; color:var(--gold);">FRESH SEAFOOD</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-badge">
+        <div class="badge-text">MASAKAN<br>KHAS<br>MAKASSAR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header reveal">
+    <span class="section-tag">Pilihan Menu</span>
+    <h2 class="section-title">Sajian Unggulan<br>Kami</h2>
+    <p>Setiap hidangan disiapkan dengan bahan-bahan segar dan bumbu pilihan khas Makassar</p>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-item reveal">
+      <span class="menu-num">01 ·</span>
+      <div class="menu-name">Kepiting Saus Padang</div>
+      <div class="menu-desc">Kepiting segar dimasak dengan saus Padang pedas yang kaya rempah, disajikan panas</div>
+      <div class="menu-price">Seafood Segar</div>
+    </div>
+    <div class="menu-item reveal reveal-delay-1">
+      <span class="menu-num">02 ·</span>
+      <div class="menu-name">Udang Bakar Rica</div>
+      <div class="menu-desc">Udang jumbo dibakar sempurna dengan bumbu rica-rica pedas khas Sulawesi</div>
+      <div class="menu-price">Seafood Segar</div>
+    </div>
+    <div class="menu-item reveal reveal-delay-2">
+      <span class="menu-num">03 ·</span>
+      <div class="menu-name">Ikan Bakar Makassar</div>
+      <div class="menu-desc">Ikan segar pilihan dibakar dengan bumbu khas Makassar yang gurih dan beraroma</div>
+      <div class="menu-price">Seafood Segar</div>
+    </div>
+    <div class="menu-item reveal">
+      <span class="menu-num">04 ·</span>
+      <div class="menu-name">Coto Makassar</div>
+      <div class="menu-desc">Sup daging sapi khas Makassar dengan bumbu rempa pilihan, disajikan dengan ketupat</div>
+      <div class="menu-price">Masakan Khas</div>
+    </div>
+    <div class="menu-item reveal reveal-delay-1">
+      <span class="menu-num">05 ·</span>
+      <div class="menu-name">Pallubasa</div>
+      <div class="menu-desc">Hidangan berkuah khas Makassar dengan daging sapi dan jeroan, kuah gurih yang kaya</div>
+      <div class="menu-price">Masakan Khas</div>
+    </div>
+    <div class="menu-item reveal reveal-delay-2">
+      <span class="menu-num">06 ·</span>
+      <div class="menu-name">Nasi Goreng Seafood</div>
+      <div class="menu-desc">Nasi goreng dengan campuran seafood segar, telur, dan bumbu spesial rumah</div>
+      <div class="menu-price">Andalan Kami</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item"><span class="strip-dot"></span>Fresh Seafood Daily</span>
+    <span class="strip-item"><span class="strip-dot"></span>Masakan Khas Makassar</span>
+    <span class="strip-item"><span class="strip-dot"></span>Buka Setiap Hari</span>
+    <span class="strip-item"><span class="strip-dot"></span>Bumbu Rempah Pilihan</span>
+    <span class="strip-item"><span class="strip-dot"></span>Cita Rasa Autentik</span>
+    <span class="strip-item"><span class="strip-dot"></span>Fresh Seafood Daily</span>
+    <span class="strip-item"><span class="strip-dot"></span>Masakan Khas Makassar</span>
+    <span class="strip-item"><span class="strip-dot"></span>Buka Setiap Hari</span>
+    <span class="strip-item"><span class="strip-dot"></span>Bumbu Rempah Pilihan</span>
+    <span class="strip-item"><span class="strip-dot"></span>Cita Rasa Autentik</span>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header reveal">
+    <span class="section-tag">Galeri</span>
+    <h2 class="section-title">Setiap Hidangan,<br>Sebuah Karya</h2>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="gallery-placeholder" style="font-size:5rem;">🦞</div>
+      <div class="gallery-overlay"><span class="gallery-label">Kepiting Segar</span></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">🐟</div>
+      <div class="gallery-overlay"><span class="gallery-label">Ikan Bakar</span></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">🍜</div>
+      <div class="gallery-overlay"><span class="gallery-label">Coto Makassar</span></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">🦐</div>
+      <div class="gallery-overlay"><span class="gallery-label">Udang Segar</span></div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">🍛</div>
+      <div class="gallery-overlay"><span class="gallery-label">Nasi Goreng Seafood</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section class="info-section" id="info">
+  <div class="info-inner">
+    <div class="info-left">
+      <span class="section-tag">Informasi</span>
+      <h2 class="section-title reveal">Kunjungi<br>Kami</h2>
+
+      <div class="info-detail reveal">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-text-label">Jam Operasional</div>
+          <div class="info-text-val">Setiap Hari<br>Buka — Tutup pukul 21.00 WIB<br><span style="color:var(--amber); font-size:0.85rem;">*Jam operasional dapat berubah pada hari libur nasional</span></div>
+        </div>
+      </div>
+
+      <div class="info-detail reveal">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-text-label">Alamat</div>
+          <div class="info-text-val">Kuin Cerucuk, Kec. Banjarmasin Bar.<br>Kota Banjarmasin, Kalimantan Selatan 70116</div>
+        </div>
+      </div>
+
+      <div class="info-detail reveal">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-text-label">Telepon / WhatsApp</div>
+          <div class="info-text-val"><a href="tel:081321371971">0813-2137-1971</a></div>
+        </div>
+      </div>
+
+      <a href="tel:081321371971" class="btn-primary" style="margin-top:2rem; display:inline-block;">Hubungi Kami</a>
+    </div>
+
+    <div class="info-right reveal reveal-delay-2">
+      <div class="map-placeholder">
+        <div class="map-inner">
+          <div>📍</div>
+          <p>Banjarmasin<br>Kalimantan Selatan</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ekspedisi Arif & W</div>
+  <div class="footer-tagline">Fresh Seafood · Masakan Khas Makassar · Banjarmasin</div>
+  <ul class="footer-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Galeri</a></li>
+    <li><a href="#info">Kunjungi</a></li>
+  </ul>
+  <div class="footer-bottom">© 2026 Ekspedisi Arif & W · Kota Banjarmasin, Kalimantan Selatan</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
